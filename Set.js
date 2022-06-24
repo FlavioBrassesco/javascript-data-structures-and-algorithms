@@ -7,8 +7,9 @@ export default class Set {
     if (!this.set[element]) {
       this.set[element] = element;
       this.size++;
+      return true;
     }
-    return element;
+    return false;
   }
 
   delete(element) {
@@ -22,7 +23,7 @@ export default class Set {
   clear() {
     this.set = {};
     this.size = 0;
-    return this.set;
+    return true;
   }
 
   *values() {
