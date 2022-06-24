@@ -93,7 +93,6 @@ export default class Set {
   }
 
   subset(otherSet) {
-    const values = Object.keys(this.set);
     const otherValues = Object.keys(otherSet.set);
     for (let i = 0; i < otherValues.length; i++) {
       if (!this.has(otherValues[i])) return false;
