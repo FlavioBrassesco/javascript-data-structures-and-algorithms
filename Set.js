@@ -26,6 +26,7 @@ export default class Set {
     return true;
   }
 
+  // mimic Set native implementation in javascript
   *values() {
     for (let key in this.set) {
       yield this.set[key];
@@ -40,11 +41,13 @@ export default class Set {
     return this.set.hasOwnProperty(element);
   }
 
+  // all values in both sets without duplicates
   union(otherSet) {
     const newSet = new Set();
     const values = Object.keys(this.set);
     const otherValues = Object.keys(otherSet.set);
 
+    // equal values get omitted by default by the add method
     for (let i = 0; i < values.length; i++) {
       newSet.add(values[i]);
     }
@@ -55,6 +58,7 @@ export default class Set {
     return newSet;
   }
 
+  // only values that exists in both sets
   intersection(otherSet) {
     const newSet = new Set();
     const values = Object.keys(this.set);
@@ -66,6 +70,7 @@ export default class Set {
     return newSet;
   }
 
+  // all the values in this set that are not in otherSet
   difference(otherSet) {
     const newSet = new Set();
     const values = Object.keys(this.set);
@@ -77,6 +82,7 @@ export default class Set {
     return newSet;
   }
 
+  // all the values in both sets minus intersection
   symmetricDifference(otherSet) {
     const newSet = new Set();
     const values = Object.keys(this.set);
@@ -92,6 +98,7 @@ export default class Set {
     return newSet;
   }
 
+  // otherSet is a subset of this set
   subset(otherSet) {
     const otherValues = Object.keys(otherSet.set);
     for (let i = 0; i < otherValues.length; i++) {
