@@ -18,7 +18,11 @@ tree.insert(20);
 tree.insert(18);
 tree.insert(25);
 
-console.log("traverse", tree.iterativeInOrderTraverse());
-console.log("pretraverse", tree.iterativePreOrderTraverse());
-console.log("posttraverse", tree.iterativePostOrderTraverse());
-console.log("postcount", tree.postOrderTraverse(console.log));
+console.log("min", tree.min());
+console.log("max", tree.max());
+console.log("search", tree.search(20) ? "true" : "false");
+console.log("search", tree.search(19) ? "true" : "false");
+console.log("search", tree.search(18) ? "true" : "false");
+console.log("search", tree.search(17) ? "true" : "false");
+tree.remove(10);
+console.log(tree.iterativeInOrderTraverse());

@@ -33,6 +33,91 @@ class BinarySearchTree {
     }
   }
 
+  min() {
+    let current = this.root;
+    while (current?.left) {
+      current = current.left;
+    }
+    return current?.key;
+  }
+
+  findMinNode(node) {
+    while (node?.left) {
+      node = node.left;
+    }
+    return node;
+  }
+
+  max() {
+    let current = this.root;
+    while (current?.right) {
+      current = current.right;
+    }
+    return current?.key;
+  }
+
+  search(key) {
+    return this.searchNode(this.root, key);
+  }
+
+  searchNode(node, key) {
+    if (node === null) return false;
+
+    if (key < node.key) {
+      return this.searchNode(node.left, key);
+    }
+    if (key > node.key) {
+      return this.searchNode(node.right, key);
+    }
+
+    return true;
+  }
+
+  remove(key) {
+    this.root = this.removeNode(this.root, key);
+  }
+
+  removeNode(node, key) {
+    if (node === null) return node;
+
+    if (key < node.key) {
+      node.left = this.removeNode(node.left, key);
+      return node;
+    }
+    if (key > node.key) {
+      node.right = this.removeNode(node.right, key);
+      return node;
+    }
+
+    // if the removed node is a leaf, we return null.
+    if (node.left === null && node.right === null) {
+      node = null;
+      return node;
+    }
+
+    // if removed node has only one node to the right
+    // we return that node
+    if (node.left === null) {
+      node = node.right;
+      return node;
+    }
+
+    // if removed node has only one node to the left
+    // we return that node
+    if (node.right === null) {
+      node = node.left;
+      return node;
+    }
+
+    // since all nodes to the right of a (sub)tree root will be bigger
+    // than the nodes to the left, the "heir" of the root is the min from the right subtree
+    let auxNode = this.findMinNode(node.right);
+    node.key = auxNode.key;
+    // we replace the removed node key by the "heir" key and remove the heir;
+    node.right = this.removeNode(node.right, auxNode.key);
+    return node;
+  }
+
   inOrderTraverse(callback) {
     this.inOrderTraverseNode(this.root, callback);
   }
