@@ -6,7 +6,7 @@ class Dictionary {
   }
 
   get(key) {
-    return this.has(key) ? this.dict.key : undefined;
+    return this.has(key) ? this.dict[key] : undefined;
   }
 
   has(key) {
