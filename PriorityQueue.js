@@ -1,4 +1,4 @@
-import Queue from "./Queue";
+const Queue = require("./Queue");
 
 class QueueElement {
   constructor(element, priority) {
@@ -7,7 +7,7 @@ class QueueElement {
   }
 }
 
-export default class PriorityQueue extends Queue {
+class PriorityQueue extends Queue {
   enqueue(element, priority) {
     const el = new QueueElement(element, priority);
 
@@ -21,3 +21,4 @@ export default class PriorityQueue extends Queue {
     return this.items.push(el);
   }
 }
+module.exports = PriorityQueue;

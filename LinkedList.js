@@ -5,7 +5,7 @@ class Node {
   }
 }
 
-export default class LinkedList {
+class LinkedList {
   length = 0;
   head = null;
   tail = null;
@@ -106,3 +106,4 @@ export default class LinkedList {
     return string;
   }
 }
+module.exports = LinkedList;

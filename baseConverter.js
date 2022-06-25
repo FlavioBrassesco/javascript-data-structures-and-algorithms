@@ -1,6 +1,6 @@
-import Stack from "./Stack";
+const Stack = require("./Stack");
 
-export default function baseConverter(decimalNumber, base) {
+function baseConverter(decimalNumber, base) {
   let remainderStack = new Stack(),
   baseString = "",
   digits = "0123456789ABCDEF";
@@ -18,3 +18,4 @@ export default function baseConverter(decimalNumber, base) {
 
   return baseString;
 }
+module.exports = baseConverter;

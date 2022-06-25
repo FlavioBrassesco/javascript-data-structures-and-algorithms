@@ -1,4 +1,4 @@
-export default class Queue {
+class Queue {
   items = [];
 
   enqueue(element) {
@@ -21,3 +21,4 @@ export default class Queue {
     return this.items.length;
   }
 }
+module.exports = Queue;

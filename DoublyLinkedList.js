@@ -6,7 +6,7 @@ class Node {
   }
 }
 
-export default class DoublyLinkedList {
+class DoublyLinkedList {
   head = null;
   tail = null;
   length = 0;
@@ -130,3 +130,4 @@ export default class DoublyLinkedList {
     return string;
   }
 }
+module.exports = DoublyLinkedList;

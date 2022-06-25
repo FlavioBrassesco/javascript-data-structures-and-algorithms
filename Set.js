@@ -1,5 +1,5 @@
 // javascript already has a Set class, this is to know the inner workings
-export default class Set {
+class Set {
   set = {};
   size = 0; // size can also be fetched with Object.keys(set).length
 
@@ -107,3 +107,4 @@ export default class Set {
     return true;
   }
 }
+module.exports = Set;

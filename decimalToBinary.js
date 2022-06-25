@@ -1,6 +1,6 @@
-import Stack from "./Stack";
+const Stack = require("./Stack");
 
-export default function decimalToBinary(decimalNumber) {
+function decimalToBinary(decimalNumber) {
   let remainderStack = new Stack(),
     binaryString = "";
 
@@ -16,3 +16,4 @@ export default function decimalToBinary(decimalNumber) {
 
   return binaryString;
 }
+module.exports = decimalToBinary;

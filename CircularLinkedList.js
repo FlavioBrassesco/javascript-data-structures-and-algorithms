@@ -5,7 +5,7 @@ class Node {
   }
 }
 
-export default class CircularLinkedList {
+class CircularLinkedList {
   length = 0;
   head = null;
   tail = null;
@@ -113,3 +113,4 @@ export default class CircularLinkedList {
     return string;
   }
 }
+module.exports = CircularLinkedList;
