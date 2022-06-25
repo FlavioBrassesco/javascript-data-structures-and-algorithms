@@ -118,6 +118,23 @@ class BinarySearchTree {
     return node;
   }
 
+  breadthTraverse(callback) {
+    let queue = [];
+    queue.push(this.root);
+
+    while (queue.length) {
+      // we shift here for convinience (store ref and dequeue).
+      // We could also store a ref like node = queue[0]
+      let node = queue.shift();
+      // add each child to the queue
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+      // call the callback (visit the node)
+      callback(node.key);
+      // and finally shift here
+    }
+  }
+
   inOrderTraverse(callback) {
     this.inOrderTraverseNode(this.root, callback);
   }
@@ -153,10 +170,9 @@ class BinarySearchTree {
     callback(node.key);
   }
 
-  iterativeInOrderTraverse() {
+  iterativeInOrderTraverse(callback) {
     let current = this.root;
     let stack = [];
-    let result = [];
 
     while (current || stack.length) {
       // first we go deep to the left
@@ -167,23 +183,20 @@ class BinarySearchTree {
       // we can pop right here because if there is no right
       // we finished this stack, and we already visited the node (down)
       current = stack.pop();
-      result.push(current.key); // visit node
+      callback(current.key); // visit node
       current = current.right;
     }
-
-    return result;
   }
 
-  iterativePreOrderTraverse() {
+  iterativePreOrderTraverse(callback) {
     let current = this.root;
     let stack = [];
-    let result = [];
 
     while (current || stack.length) {
       // we go deep to the left while visiting each node
       while (current) {
         stack.push(current);
-        result.push(current.key);
+        callback(current.key);
         current = current.left;
       }
       // we can pop right here because if there is no right
@@ -191,43 +204,45 @@ class BinarySearchTree {
       current = stack.pop();
       current = current.right;
     }
-
-    return result;
   }
 
-  iterativePostOrderTraverse() {
+  iterativePostOrderTraverse(callback) {
     let current = this.root;
     let stack = [];
-    let result = [];
+    let colors = [];
+
+    stack.push(current);
+    colors[current.key] = "gray";
 
     while (current || stack.length) {
-      // second condition checks if we already visited left
-      while (current && current !== stack[stack.length - 1]) {
-        stack.push(current);
+      // second condition checks if we already discovered left
+      while (current.left && colors[current.left.key] === undefined) {
         current = current.left;
+        stack.push(current);
+        colors[current.key] = "gray";
       }
-
-      current = stack[stack.length - 1];
 
       // if there is no right, it means we reached a leaf
       // and we must visit the target node and pop the stack
       if (!current.right) {
-        result.push(stack.pop().key);
+        colors[current.key] = "black";
+        callback(stack.pop().key);
         current = stack[stack.length - 1];
         continue;
       }
 
-      // second condition checks if we already visited right
-      if (current.right.key !== result[result.length - 1]) {
+      // condition checks if we already discovered right
+      if (colors[current.right.key] === undefined) {
         current = current.right;
+        stack.push(current);
+        colors[current.key] = "gray";
         continue;
       }
 
-      result.push(stack.pop().key);
+      colors[current.key] = "black";
+      callback(stack.pop().key);
       current = stack[stack.length - 1];
     }
-
-    return result;
   }
 }
 module.exports = BinarySearchTree;
